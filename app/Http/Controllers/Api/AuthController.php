@@ -14,7 +14,7 @@ class AuthController extends Controller
     public function register(Request $request){
         $registrationData = $request->all();
 
-        $validate Validator::make($registrationData,[
+        $validate = Validator::make($registrationData,[
             'name' => 'required|max:60',
             'email' => 'required|email:rfc,dns|unique:users',
             'passqord' => 'required'
@@ -32,30 +32,30 @@ class AuthController extends Controller
             'user' => $user
         ], 200);
 
-        public function login(Request $request){
-            $loginData = $request->all();
+    }
 
-            $validate = Validator::make($loginData,[
-                'email' => 'required|email:rfc, dns',
-                'password' => 'required'
-            ]);
+    public function login(Request $request){
+        $loginData = $request->all();
 
-            if($validate->fails())
-                return response(['message' => $validate->error()],404);
+        $validate = Validator::make($loginData,[
+            'email' => 'required|email:rfc, dns',
+            'password' => 'required'
+        ]);
 
-            if(!Auth::attempt($loginData))
-                return respons(['message' => 'Invalid Crendential'], 401);
+        if($validate->fails())
+            return response(['message' => $validate->error()],404);
 
-            $user = Auth::user();
-            $token = $user->createToken('Authentication Token')-> AccessToken;
+        if(!Auth::attempt($loginData))
+            return respons(['message' => 'Invalid Crendential'], 401);
 
-            return response([
-                'message' => 'Authenticated',
-                'user' => $user,
-                'token_type' => 'Bearer',
-                'access_token' => $token,
-            ]);
-        }
+        $user = Auth::user();
+        $token = $user->createToken('Authentication Token')-> AccessToken;
 
+        return response([
+            'message' => 'Authenticated',
+            'user' => $user,
+            'token_type' => 'Bearer',
+            'access_token' => $token,
+        ]);
     }
 }
