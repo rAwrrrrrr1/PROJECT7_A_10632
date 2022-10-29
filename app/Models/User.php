@@ -46,8 +46,8 @@ class User extends Authenticatable
 
 
     public function getCreatedAtAttribute(){
-        if(!is_null($this->attributes['create_at'])){
-            return Carbon::parse($this->attributes['create_at'])->format('Y-m-d H:i:s');
+        if(!is_null($this->attributes['created_at'])){
+            return Carbon::parse($this->attributes['created_at'])->format('Y-m-d H:i:s');
         }
     }
 

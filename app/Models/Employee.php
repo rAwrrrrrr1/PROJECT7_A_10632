@@ -6,16 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class Product extends Model
+class Employee extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nama_barang',
-        'kode',
-        'harga',
-        'jumlah'
+        'nama_pegawai',
+        'nip',
+        'role',
+        'alamat',
+        'tgl_lahir',
+        'no_telepon'
     ];
+
 
     public function getCreatedAtAttribute(){
         if(!is_null($this->attributes['created_at'])){
