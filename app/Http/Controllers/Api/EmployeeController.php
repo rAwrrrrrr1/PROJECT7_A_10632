@@ -49,12 +49,12 @@ class EmployeeController extends Controller
     {
         $storeData = $request->all();
         $validate = Validator::make($storeData, [
-            'nama_pegawai' => 'required|max:255|regex:/[a-zA-Z]/',
-            'nip' => 'required|max:6|numeric',
+            'nama_pegawai' => 'required|max:255|regex:/^[a-zA-Z ]*$/',
+            'nip' => 'required|digits:6|numeric',
             'role' => 'required',
             'alamat' => 'required',
-            'tgl_lahir' => 'required|date_format:y/m/d',
-            'no_telp' => 'required|max:13|numeric'
+            'tgl_lahir' => 'required',
+            'no_telp' => 'required|digits:13|numeric'
         ]);
 
         if($validate->fails())
@@ -119,7 +119,7 @@ class EmployeeController extends Controller
 
         $updateData = $request->all();
         $validate = Validator::make($updateData, [
-            'nama_pegawai' => ['required','max:60',Rule::unique('products')->ignore($employee)],
+            'nama_pegawai' => ['required','max:255','regex:/^[a-zA-Z ]*$/'],
             'nip' => 'required',
             'role' => 'required',
             'alamat' => 'required',
