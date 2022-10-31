@@ -178,4 +178,8 @@ class EmployeeController extends Controller
             'data' => null
         ], 400);
     }
+
+    public function logout(){
+        
+    }
 }
